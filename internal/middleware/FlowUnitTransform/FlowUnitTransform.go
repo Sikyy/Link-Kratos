@@ -23,8 +23,8 @@ func FlowUnitTransform() middleware.Middleware {
 		return func(ctx context.Context, req interface{}) (reply interface{}, err error) {
 			if tr, ok := transport.FromServerContext(ctx); ok {
 				// 获取请求流量大小
-				UpflowSize := tr.ReplyHeader().Get("Upload")
-				DownflowSize := tr.ReplyHeader().Get("Download")
+				UpflowSize := tr.ReplyHeader().Get("upload")
+				DownflowSize := tr.ReplyHeader().Get("download")
 
 				// 转换流量单位
 				UptransformedSize := TransformUnit(UpflowSize)
@@ -48,6 +48,8 @@ func TransformUnit(size string) string {
 		"KB": 1024,
 		"MB": 1048576,
 		"GB": 1073741824,
+		"TB": 1099511627776,
+		"PB": 1125899906842624,
 	}
 
 	// 转换流量大小为int64类型
@@ -73,5 +75,5 @@ func TransformUnit(size string) string {
 	result := fmt.Sprintf("%s %s", strconv.FormatFloat(newfloatsize, 'f', 2, 64), unit)
 
 	// 返回转换后的流量大小和单位
-	return result
+	return result //有精度问题，明天解决
 }

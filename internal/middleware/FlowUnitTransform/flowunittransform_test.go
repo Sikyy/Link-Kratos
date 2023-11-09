@@ -6,6 +6,6 @@ import (
 )
 
 func TestTransformUnit(t *testing.T) {
-	a := TransformUnit("648124")
+	a := TransformUnit("6481244")
 	fmt.Println(a)
 }
