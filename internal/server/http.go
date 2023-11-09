@@ -3,6 +3,7 @@ package server
 import (
 	v1 "Link-Kratos/api/link/v1"
 	"Link-Kratos/internal/conf"
+	"Link-Kratos/internal/middleware/FlowUnitTransform"
 	"Link-Kratos/internal/service"
 
 	"github.com/go-kratos/kratos/v2/log"
@@ -15,7 +16,7 @@ func NewHTTPServer(c *conf.Server, link *service.LinkService, logger log.Logger)
 	var opts = []http.ServerOption{
 		http.Middleware(
 			recovery.Recovery(),
-			// interceptor.InterceptorMiddleware(),
+			FlowUnitTransform.FlowUnitTransform(),
 		),
 	}
 	if c.Http.Network != "" {

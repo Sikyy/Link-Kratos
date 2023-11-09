@@ -30,8 +30,8 @@ type Interceptor struct {
 	Date       string //请求时间
 	ClientName string //客户端名称
 	Status     string //请求状态
-	Upload     string //上传流量大小
-	Download   string //下载流量大小
+	Upload     int64  //上传流量大小
+	Download   int64  //下载流量大小
 	Time       string //请求耗时
 }
 
@@ -105,14 +105,14 @@ func (uc *TrafficUsecase) GetInterceptorById(ctx context.Context, id int) (*Inte
 	}
 	return &Interceptor{
 		Id:         i.Id,
-		User_Agent: "User_Agent",
-		Method:     "200",
-		Host:       "bilibili.com:443",
-		Date:       time.Now().String(),
+		User_Agent: i.User_Agent,
+		Method:     i.Method,
+		Host:       i.Host,
+		Date:       i.Time,
 		ClientName: "哔哩哔哩",
 		Status:     "活动中",
-		Upload:     "3.14MB",
-		Download:   "3GB",
+		Upload:     482348346,
+		Download:   649839493275,
 		Time:       "3000ms",
 	}, nil
 }
