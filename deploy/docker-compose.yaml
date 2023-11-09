@@ -1,0 +1,10 @@
+version: '3'
+services:
+  Link-Kratos:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: dangerous 
+    ports: 
+      - 3306:3306
+    volumes:
+      - "./data:/var/lib/mysql" #把数据库文件挂载到本地

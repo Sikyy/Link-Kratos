@@ -15,6 +15,7 @@ func NewHTTPServer(c *conf.Server, link *service.LinkService, logger log.Logger)
 	var opts = []http.ServerOption{
 		http.Middleware(
 			recovery.Recovery(),
+			// interceptor.InterceptorMiddleware(),
 		),
 	}
 	if c.Http.Network != "" {

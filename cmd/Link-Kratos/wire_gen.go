@@ -12,24 +12,30 @@ import (
 	"Link-Kratos/internal/data"
 	"Link-Kratos/internal/server"
 	"Link-Kratos/internal/service"
-
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
+)
+
+import (
+	_ "go.uber.org/automaxprocs"
 )
 
 // Injectors from wire.go:
 
 // wireApp init kratos application.
 func wireApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*kratos.App, func(), error) {
-	dataData, cleanup, err := data.NewData(confData, logger)
+	db := data.NewDB(confData)
+	dataData, cleanup, err := data.NewData(confData, logger, db)
 	if err != nil {
 		return nil, nil, err
 	}
-	greeterRepo := data.NewGreeterRepo(dataData, logger)
-	greeterUsecase := biz.NewGreeterUsecase(greeterRepo, logger)
-	greeterService := service.NewGreeterService(greeterUsecase)
-	grpcServer := server.NewGRPCServer(confServer, greeterService, logger)
-	httpServer := server.NewHTTPServer(confServer, greeterService, logger)
+	realTimeTrafficRepo := data.NewRealTimeTrafficRepo(dataData, logger)
+	interceptorRepo := data.NewInterceptorRepo(dataData, logger)
+	statisticsRepo := data.NewStatisticsRepo(dataData, logger)
+	trafficUsecase := biz.NewTrafficUsecase(realTimeTrafficRepo, interceptorRepo, statisticsRepo, logger)
+	linkService := service.NewLinkService(trafficUsecase)
+	grpcServer := server.NewGRPCServer(confServer, linkService, logger)
+	httpServer := server.NewHTTPServer(confServer, linkService, logger)
 	app := newApp(logger, grpcServer, httpServer)
 	return app, func() {
 		cleanup()

@@ -4,19 +4,30 @@
 openapi: 3.0.3
 info:
     title: Link API
-    description: The greeting service definition.
     version: 0.0.1
 paths:
-    /helloworld/{name}:
+    /api/users/interceptor:
         get:
             tags:
                 - Link
-            description: Sends a greeting
-            operationId: Link_SayHello
+            description: 拦截流量信息，并返回
+            operationId: Link_Interceptor
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/link.v1.InterceptorReply'
+    /api/users/realtimetraffic:
+        get:
+            tags:
+                - Link
+            description: 获取实时流量信息，并返回
+            operationId: Link_RealTimeTraffic
             parameters:
-                - name: name
-                  in: path
-                  required: true
+                - name: realtimeTraffic.clientName
+                  in: query
                   schema:
                     type: string
             responses:
@@ -25,14 +36,72 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/link.v1.HelloReply'
+                                $ref: '#/components/schemas/link.v1.RealTimeTrafficReply'
+    /api/users/statistics:
+        get:
+            tags:
+                - Link
+            description: 统计流量信息，并返回
+            operationId: Link_Statistics
+            parameters:
+                - name: statistics.clientName
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/link.v1.StatisticsReply'
 components:
     schemas:
-        link.v1.HelloReply:
+        link.v1.InterceptorReply:
             type: object
             properties:
-                message:
+                interceptor:
+                    $ref: '#/components/schemas/link.v1.InterceptorReply_Interceptor'
+        link.v1.InterceptorReply_Interceptor:
+            type: object
+            properties:
+                date:
                     type: string
-            description: The response message containing the greetings
+                clientName:
+                    type: string
+                status:
+                    type: string
+                uploadSize:
+                    type: string
+                downloadSize:
+                    type: string
+                durationMs:
+                    type: string
+                method:
+                    type: string
+        link.v1.RealTimeTrafficReply:
+            type: object
+            properties:
+                realtimeTraffic:
+                    $ref: '#/components/schemas/link.v1.RealTimeTrafficReply_RealTimeTraffic'
+        link.v1.RealTimeTrafficReply_RealTimeTraffic:
+            type: object
+            properties:
+                upflow:
+                    type: string
+                downflow:
+                    type: string
+        link.v1.StatisticsReply:
+            type: object
+            properties:
+                statistics:
+                    $ref: '#/components/schemas/link.v1.StatisticsReply_Statistics'
+        link.v1.StatisticsReply_Statistics:
+            type: object
+            properties:
+                upflow:
+                    type: string
+                downflow:
+                    type: string
 tags:
     - name: Link

@@ -19,15 +19,21 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Link_SayHello_FullMethodName = "/link.v1.Link/SayHello"
+	Link_Interceptor_FullMethodName     = "/link.v1.Link/Interceptor"
+	Link_Statistics_FullMethodName      = "/link.v1.Link/Statistics"
+	Link_RealTimeTraffic_FullMethodName = "/link.v1.Link/RealTimeTraffic"
 )
 
 // LinkClient is the client API for Link service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type LinkClient interface {
-	// Sends a greeting
-	SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error)
+	// 拦截流量信息，并返回
+	Interceptor(ctx context.Context, in *InterceptorRequest, opts ...grpc.CallOption) (*InterceptorReply, error)
+	// 统计流量信息，并返回
+	Statistics(ctx context.Context, in *StatisticsRequest, opts ...grpc.CallOption) (*StatisticsReply, error)
+	// 获取实时流量信息，并返回
+	RealTimeTraffic(ctx context.Context, in *RealTimeTrafficRequest, opts ...grpc.CallOption) (*RealTimeTrafficReply, error)
 }
 
 type linkClient struct {
@@ -38,9 +44,27 @@ func NewLinkClient(cc grpc.ClientConnInterface) LinkClient {
 	return &linkClient{cc}
 }
 
-func (c *linkClient) SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error) {
-	out := new(HelloReply)
-	err := c.cc.Invoke(ctx, Link_SayHello_FullMethodName, in, out, opts...)
+func (c *linkClient) Interceptor(ctx context.Context, in *InterceptorRequest, opts ...grpc.CallOption) (*InterceptorReply, error) {
+	out := new(InterceptorReply)
+	err := c.cc.Invoke(ctx, Link_Interceptor_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *linkClient) Statistics(ctx context.Context, in *StatisticsRequest, opts ...grpc.CallOption) (*StatisticsReply, error) {
+	out := new(StatisticsReply)
+	err := c.cc.Invoke(ctx, Link_Statistics_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *linkClient) RealTimeTraffic(ctx context.Context, in *RealTimeTrafficRequest, opts ...grpc.CallOption) (*RealTimeTrafficReply, error) {
+	out := new(RealTimeTrafficReply)
+	err := c.cc.Invoke(ctx, Link_RealTimeTraffic_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -51,8 +75,12 @@ func (c *linkClient) SayHello(ctx context.Context, in *HelloRequest, opts ...grp
 // All implementations must embed UnimplementedLinkServer
 // for forward compatibility
 type LinkServer interface {
-	// Sends a greeting
-	SayHello(context.Context, *HelloRequest) (*HelloReply, error)
+	// 拦截流量信息，并返回
+	Interceptor(context.Context, *InterceptorRequest) (*InterceptorReply, error)
+	// 统计流量信息，并返回
+	Statistics(context.Context, *StatisticsRequest) (*StatisticsReply, error)
+	// 获取实时流量信息，并返回
+	RealTimeTraffic(context.Context, *RealTimeTrafficRequest) (*RealTimeTrafficReply, error)
 	mustEmbedUnimplementedLinkServer()
 }
 
@@ -60,8 +88,14 @@ type LinkServer interface {
 type UnimplementedLinkServer struct {
 }
 
-func (UnimplementedLinkServer) SayHello(context.Context, *HelloRequest) (*HelloReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SayHello not implemented")
+func (UnimplementedLinkServer) Interceptor(context.Context, *InterceptorRequest) (*InterceptorReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Interceptor not implemented")
+}
+func (UnimplementedLinkServer) Statistics(context.Context, *StatisticsRequest) (*StatisticsReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Statistics not implemented")
+}
+func (UnimplementedLinkServer) RealTimeTraffic(context.Context, *RealTimeTrafficRequest) (*RealTimeTrafficReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RealTimeTraffic not implemented")
 }
 func (UnimplementedLinkServer) mustEmbedUnimplementedLinkServer() {}
 
@@ -76,20 +110,56 @@ func RegisterLinkServer(s grpc.ServiceRegistrar, srv LinkServer) {
 	s.RegisterService(&Link_ServiceDesc, srv)
 }
 
-func _Link_SayHello_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HelloRequest)
+func _Link_Interceptor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InterceptorRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(LinkServer).SayHello(ctx, in)
+		return srv.(LinkServer).Interceptor(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Link_SayHello_FullMethodName,
+		FullMethod: Link_Interceptor_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LinkServer).SayHello(ctx, req.(*HelloRequest))
+		return srv.(LinkServer).Interceptor(ctx, req.(*InterceptorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Link_Statistics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StatisticsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LinkServer).Statistics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Link_Statistics_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LinkServer).Statistics(ctx, req.(*StatisticsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Link_RealTimeTraffic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RealTimeTrafficRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LinkServer).RealTimeTraffic(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Link_RealTimeTraffic_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LinkServer).RealTimeTraffic(ctx, req.(*RealTimeTrafficRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -102,8 +172,16 @@ var Link_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*LinkServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SayHello",
-			Handler:    _Link_SayHello_Handler,
+			MethodName: "Interceptor",
+			Handler:    _Link_Interceptor_Handler,
+		},
+		{
+			MethodName: "Statistics",
+			Handler:    _Link_Statistics_Handler,
+		},
+		{
+			MethodName: "RealTimeTraffic",
+			Handler:    _Link_RealTimeTraffic_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

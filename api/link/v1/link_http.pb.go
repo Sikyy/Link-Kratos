@@ -19,42 +19,87 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationLinkSayHello = "/link.v1.Link/SayHello"
+const OperationLinkInterceptor = "/link.v1.Link/Interceptor"
+const OperationLinkRealTimeTraffic = "/link.v1.Link/RealTimeTraffic"
+const OperationLinkStatistics = "/link.v1.Link/Statistics"
 
 type LinkHTTPServer interface {
-	// SayHello Sends a greeting
-	SayHello(context.Context, *HelloRequest) (*HelloReply, error)
+	// Interceptor拦截流量信息，并返回
+	Interceptor(context.Context, *InterceptorRequest) (*InterceptorReply, error)
+	// RealTimeTraffic获取实时流量信息，并返回
+	RealTimeTraffic(context.Context, *RealTimeTrafficRequest) (*RealTimeTrafficReply, error)
+	// Statistics统计流量信息，并返回
+	Statistics(context.Context, *StatisticsRequest) (*StatisticsReply, error)
 }
 
 func RegisterLinkHTTPServer(s *http.Server, srv LinkHTTPServer) {
 	r := s.Route("/")
-	r.GET("/helloworld/{name}", _Link_SayHello0_HTTP_Handler(srv))
+	r.GET("/api/users/interceptor", _Link_Interceptor0_HTTP_Handler(srv))
+	r.GET("/api/users/statistics", _Link_Statistics0_HTTP_Handler(srv))
+	r.GET("/api/users/realtimetraffic", _Link_RealTimeTraffic0_HTTP_Handler(srv))
 }
 
-func _Link_SayHello0_HTTP_Handler(srv LinkHTTPServer) func(ctx http.Context) error {
+func _Link_Interceptor0_HTTP_Handler(srv LinkHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in HelloRequest
+		var in InterceptorRequest
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationLinkSayHello)
+		http.SetOperation(ctx, OperationLinkInterceptor)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.SayHello(ctx, req.(*HelloRequest))
+			return srv.Interceptor(ctx, req.(*InterceptorRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*HelloReply)
+		reply := out.(*InterceptorReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Link_Statistics0_HTTP_Handler(srv LinkHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in StatisticsRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationLinkStatistics)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.Statistics(ctx, req.(*StatisticsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*StatisticsReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Link_RealTimeTraffic0_HTTP_Handler(srv LinkHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in RealTimeTrafficRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationLinkRealTimeTraffic)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.RealTimeTraffic(ctx, req.(*RealTimeTrafficRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*RealTimeTrafficReply)
 		return ctx.Result(200, reply)
 	}
 }
 
 type LinkHTTPClient interface {
-	SayHello(ctx context.Context, req *HelloRequest, opts ...http.CallOption) (rsp *HelloReply, err error)
+	Interceptor(ctx context.Context, req *InterceptorRequest, opts ...http.CallOption) (rsp *InterceptorReply, err error)
+	RealTimeTraffic(ctx context.Context, req *RealTimeTrafficRequest, opts ...http.CallOption) (rsp *RealTimeTrafficReply, err error)
+	Statistics(ctx context.Context, req *StatisticsRequest, opts ...http.CallOption) (rsp *StatisticsReply, err error)
 }
 
 type LinkHTTPClientImpl struct {
@@ -65,11 +110,37 @@ func NewLinkHTTPClient(client *http.Client) LinkHTTPClient {
 	return &LinkHTTPClientImpl{client}
 }
 
-func (c *LinkHTTPClientImpl) SayHello(ctx context.Context, in *HelloRequest, opts ...http.CallOption) (*HelloReply, error) {
-	var out HelloReply
-	pattern := "/helloworld/{name}"
+func (c *LinkHTTPClientImpl) Interceptor(ctx context.Context, in *InterceptorRequest, opts ...http.CallOption) (*InterceptorReply, error) {
+	var out InterceptorReply
+	pattern := "/api/users/interceptor"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationLinkSayHello))
+	opts = append(opts, http.Operation(OperationLinkInterceptor))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *LinkHTTPClientImpl) RealTimeTraffic(ctx context.Context, in *RealTimeTrafficRequest, opts ...http.CallOption) (*RealTimeTrafficReply, error) {
+	var out RealTimeTrafficReply
+	pattern := "/api/users/realtimetraffic"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationLinkRealTimeTraffic))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *LinkHTTPClientImpl) Statistics(ctx context.Context, in *StatisticsRequest, opts ...http.CallOption) (*StatisticsReply, error) {
+	var out StatisticsReply
+	pattern := "/api/users/statistics"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationLinkStatistics))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

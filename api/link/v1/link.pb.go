@@ -21,17 +21,16 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// The request message containing the user's name.
-type HelloRequest struct {
+type RealTimeTrafficRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	RealtimeTraffic *RealTimeTrafficRequest_RealTimeTraffic `protobuf:"bytes,1,opt,name=realtime_traffic,json=realtimeTraffic,proto3" json:"realtime_traffic,omitempty"`
 }
 
-func (x *HelloRequest) Reset() {
-	*x = HelloRequest{}
+func (x *RealTimeTrafficRequest) Reset() {
+	*x = RealTimeTrafficRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_link_v1_link_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -39,13 +38,13 @@ func (x *HelloRequest) Reset() {
 	}
 }
 
-func (x *HelloRequest) String() string {
+func (x *RealTimeTrafficRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*HelloRequest) ProtoMessage() {}
+func (*RealTimeTrafficRequest) ProtoMessage() {}
 
-func (x *HelloRequest) ProtoReflect() protoreflect.Message {
+func (x *RealTimeTrafficRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_link_v1_link_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -57,29 +56,28 @@ func (x *HelloRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HelloRequest.ProtoReflect.Descriptor instead.
-func (*HelloRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use RealTimeTrafficRequest.ProtoReflect.Descriptor instead.
+func (*RealTimeTrafficRequest) Descriptor() ([]byte, []int) {
 	return file_link_v1_link_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *HelloRequest) GetName() string {
+func (x *RealTimeTrafficRequest) GetRealtimeTraffic() *RealTimeTrafficRequest_RealTimeTraffic {
 	if x != nil {
-		return x.Name
+		return x.RealtimeTraffic
 	}
-	return ""
+	return nil
 }
 
-// The response message containing the greetings
-type HelloReply struct {
+type RealTimeTrafficReply struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	RealtimeTraffic *RealTimeTrafficReply_RealTimeTraffic `protobuf:"bytes,1,opt,name=realtime_traffic,json=realtimeTraffic,proto3" json:"realtime_traffic,omitempty"`
 }
 
-func (x *HelloReply) Reset() {
-	*x = HelloReply{}
+func (x *RealTimeTrafficReply) Reset() {
+	*x = RealTimeTrafficReply{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_link_v1_link_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -87,13 +85,13 @@ func (x *HelloReply) Reset() {
 	}
 }
 
-func (x *HelloReply) String() string {
+func (x *RealTimeTrafficReply) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*HelloReply) ProtoMessage() {}
+func (*RealTimeTrafficReply) ProtoMessage() {}
 
-func (x *HelloReply) ProtoReflect() protoreflect.Message {
+func (x *RealTimeTrafficReply) ProtoReflect() protoreflect.Message {
 	mi := &file_link_v1_link_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -105,14 +103,563 @@ func (x *HelloReply) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HelloReply.ProtoReflect.Descriptor instead.
-func (*HelloReply) Descriptor() ([]byte, []int) {
+// Deprecated: Use RealTimeTrafficReply.ProtoReflect.Descriptor instead.
+func (*RealTimeTrafficReply) Descriptor() ([]byte, []int) {
 	return file_link_v1_link_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *HelloReply) GetMessage() string {
+func (x *RealTimeTrafficReply) GetRealtimeTraffic() *RealTimeTrafficReply_RealTimeTraffic {
 	if x != nil {
-		return x.Message
+		return x.RealtimeTraffic
+	}
+	return nil
+}
+
+type StatisticsRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Statistics *StatisticsRequest_Statistics `protobuf:"bytes,1,opt,name=statistics,proto3" json:"statistics,omitempty"`
+}
+
+func (x *StatisticsRequest) Reset() {
+	*x = StatisticsRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_link_v1_link_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *StatisticsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StatisticsRequest) ProtoMessage() {}
+
+func (x *StatisticsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_link_v1_link_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StatisticsRequest.ProtoReflect.Descriptor instead.
+func (*StatisticsRequest) Descriptor() ([]byte, []int) {
+	return file_link_v1_link_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *StatisticsRequest) GetStatistics() *StatisticsRequest_Statistics {
+	if x != nil {
+		return x.Statistics
+	}
+	return nil
+}
+
+type StatisticsReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Statistics *StatisticsReply_Statistics `protobuf:"bytes,1,opt,name=statistics,proto3" json:"statistics,omitempty"`
+}
+
+func (x *StatisticsReply) Reset() {
+	*x = StatisticsReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_link_v1_link_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *StatisticsReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StatisticsReply) ProtoMessage() {}
+
+func (x *StatisticsReply) ProtoReflect() protoreflect.Message {
+	mi := &file_link_v1_link_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StatisticsReply.ProtoReflect.Descriptor instead.
+func (*StatisticsReply) Descriptor() ([]byte, []int) {
+	return file_link_v1_link_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *StatisticsReply) GetStatistics() *StatisticsReply_Statistics {
+	if x != nil {
+		return x.Statistics
+	}
+	return nil
+}
+
+type InterceptorRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *InterceptorRequest) Reset() {
+	*x = InterceptorRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_link_v1_link_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *InterceptorRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InterceptorRequest) ProtoMessage() {}
+
+func (x *InterceptorRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_link_v1_link_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InterceptorRequest.ProtoReflect.Descriptor instead.
+func (*InterceptorRequest) Descriptor() ([]byte, []int) {
+	return file_link_v1_link_proto_rawDescGZIP(), []int{4}
+}
+
+type InterceptorReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Interceptor *InterceptorReply_Interceptor `protobuf:"bytes,1,opt,name=interceptor,proto3" json:"interceptor,omitempty"`
+}
+
+func (x *InterceptorReply) Reset() {
+	*x = InterceptorReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_link_v1_link_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *InterceptorReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InterceptorReply) ProtoMessage() {}
+
+func (x *InterceptorReply) ProtoReflect() protoreflect.Message {
+	mi := &file_link_v1_link_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InterceptorReply.ProtoReflect.Descriptor instead.
+func (*InterceptorReply) Descriptor() ([]byte, []int) {
+	return file_link_v1_link_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *InterceptorReply) GetInterceptor() *InterceptorReply_Interceptor {
+	if x != nil {
+		return x.Interceptor
+	}
+	return nil
+}
+
+type RealTimeTrafficRequest_RealTimeTraffic struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ClientName string `protobuf:"bytes,1,opt,name=client_name,json=clientName,proto3" json:"client_name,omitempty"` //客户端名称
+}
+
+func (x *RealTimeTrafficRequest_RealTimeTraffic) Reset() {
+	*x = RealTimeTrafficRequest_RealTimeTraffic{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_link_v1_link_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RealTimeTrafficRequest_RealTimeTraffic) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RealTimeTrafficRequest_RealTimeTraffic) ProtoMessage() {}
+
+func (x *RealTimeTrafficRequest_RealTimeTraffic) ProtoReflect() protoreflect.Message {
+	mi := &file_link_v1_link_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RealTimeTrafficRequest_RealTimeTraffic.ProtoReflect.Descriptor instead.
+func (*RealTimeTrafficRequest_RealTimeTraffic) Descriptor() ([]byte, []int) {
+	return file_link_v1_link_proto_rawDescGZIP(), []int{0, 0}
+}
+
+func (x *RealTimeTrafficRequest_RealTimeTraffic) GetClientName() string {
+	if x != nil {
+		return x.ClientName
+	}
+	return ""
+}
+
+type RealTimeTrafficReply_RealTimeTraffic struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Upflow   string `protobuf:"bytes,1,opt,name=upflow,proto3" json:"upflow,omitempty"`     //实时上行流量大小
+	Downflow string `protobuf:"bytes,2,opt,name=downflow,proto3" json:"downflow,omitempty"` //实时下行流量大小
+}
+
+func (x *RealTimeTrafficReply_RealTimeTraffic) Reset() {
+	*x = RealTimeTrafficReply_RealTimeTraffic{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_link_v1_link_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RealTimeTrafficReply_RealTimeTraffic) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RealTimeTrafficReply_RealTimeTraffic) ProtoMessage() {}
+
+func (x *RealTimeTrafficReply_RealTimeTraffic) ProtoReflect() protoreflect.Message {
+	mi := &file_link_v1_link_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RealTimeTrafficReply_RealTimeTraffic.ProtoReflect.Descriptor instead.
+func (*RealTimeTrafficReply_RealTimeTraffic) Descriptor() ([]byte, []int) {
+	return file_link_v1_link_proto_rawDescGZIP(), []int{1, 0}
+}
+
+func (x *RealTimeTrafficReply_RealTimeTraffic) GetUpflow() string {
+	if x != nil {
+		return x.Upflow
+	}
+	return ""
+}
+
+func (x *RealTimeTrafficReply_RealTimeTraffic) GetDownflow() string {
+	if x != nil {
+		return x.Downflow
+	}
+	return ""
+}
+
+type StatisticsRequest_Statistics struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ClientName string `protobuf:"bytes,1,opt,name=client_name,json=clientName,proto3" json:"client_name,omitempty"` //客户端名称
+}
+
+func (x *StatisticsRequest_Statistics) Reset() {
+	*x = StatisticsRequest_Statistics{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_link_v1_link_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *StatisticsRequest_Statistics) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StatisticsRequest_Statistics) ProtoMessage() {}
+
+func (x *StatisticsRequest_Statistics) ProtoReflect() protoreflect.Message {
+	mi := &file_link_v1_link_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StatisticsRequest_Statistics.ProtoReflect.Descriptor instead.
+func (*StatisticsRequest_Statistics) Descriptor() ([]byte, []int) {
+	return file_link_v1_link_proto_rawDescGZIP(), []int{2, 0}
+}
+
+func (x *StatisticsRequest_Statistics) GetClientName() string {
+	if x != nil {
+		return x.ClientName
+	}
+	return ""
+}
+
+type StatisticsReply_Statistics struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Upflow   string `protobuf:"bytes,1,opt,name=upflow,proto3" json:"upflow,omitempty"`     //上行流量大小
+	Downflow string `protobuf:"bytes,2,opt,name=downflow,proto3" json:"downflow,omitempty"` //下行流量大小
+}
+
+func (x *StatisticsReply_Statistics) Reset() {
+	*x = StatisticsReply_Statistics{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_link_v1_link_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *StatisticsReply_Statistics) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StatisticsReply_Statistics) ProtoMessage() {}
+
+func (x *StatisticsReply_Statistics) ProtoReflect() protoreflect.Message {
+	mi := &file_link_v1_link_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StatisticsReply_Statistics.ProtoReflect.Descriptor instead.
+func (*StatisticsReply_Statistics) Descriptor() ([]byte, []int) {
+	return file_link_v1_link_proto_rawDescGZIP(), []int{3, 0}
+}
+
+func (x *StatisticsReply_Statistics) GetUpflow() string {
+	if x != nil {
+		return x.Upflow
+	}
+	return ""
+}
+
+func (x *StatisticsReply_Statistics) GetDownflow() string {
+	if x != nil {
+		return x.Downflow
+	}
+	return ""
+}
+
+type InterceptorRequest_Interceptor struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	UserAgent string `protobuf:"bytes,1,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"` //请求头
+	Method    string `protobuf:"bytes,2,opt,name=method,proto3" json:"method,omitempty"`                        //请求方法
+	Host      string `protobuf:"bytes,3,opt,name=host,proto3" json:"host,omitempty"`                            //请求的主机名
+	Date      string `protobuf:"bytes,4,opt,name=date,proto3" json:"date,omitempty"`                            //请求时间
+}
+
+func (x *InterceptorRequest_Interceptor) Reset() {
+	*x = InterceptorRequest_Interceptor{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_link_v1_link_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *InterceptorRequest_Interceptor) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InterceptorRequest_Interceptor) ProtoMessage() {}
+
+func (x *InterceptorRequest_Interceptor) ProtoReflect() protoreflect.Message {
+	mi := &file_link_v1_link_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InterceptorRequest_Interceptor.ProtoReflect.Descriptor instead.
+func (*InterceptorRequest_Interceptor) Descriptor() ([]byte, []int) {
+	return file_link_v1_link_proto_rawDescGZIP(), []int{4, 0}
+}
+
+func (x *InterceptorRequest_Interceptor) GetUserAgent() string {
+	if x != nil {
+		return x.UserAgent
+	}
+	return ""
+}
+
+func (x *InterceptorRequest_Interceptor) GetMethod() string {
+	if x != nil {
+		return x.Method
+	}
+	return ""
+}
+
+func (x *InterceptorRequest_Interceptor) GetHost() string {
+	if x != nil {
+		return x.Host
+	}
+	return ""
+}
+
+func (x *InterceptorRequest_Interceptor) GetDate() string {
+	if x != nil {
+		return x.Date
+	}
+	return ""
+}
+
+type InterceptorReply_Interceptor struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Date         string `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`                                      // 请求开始时间
+	ClientName   string `protobuf:"bytes,2,opt,name=client_name,json=clientName,proto3" json:"client_name,omitempty"`        // 客户端名称
+	Status       string `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`                                  // 状态
+	UploadSize   int64  `protobuf:"varint,5,opt,name=upload_size,json=uploadSize,proto3" json:"upload_size,omitempty"`       // 上传大小
+	DownloadSize int64  `protobuf:"varint,6,opt,name=download_size,json=downloadSize,proto3" json:"download_size,omitempty"` // 下载大小
+	DurationMs   int64  `protobuf:"varint,7,opt,name=duration_ms,json=durationMs,proto3" json:"duration_ms,omitempty"`       // 持续时间
+	Method       string `protobuf:"bytes,8,opt,name=method,proto3" json:"method,omitempty"`                                  // 请求方法
+}
+
+func (x *InterceptorReply_Interceptor) Reset() {
+	*x = InterceptorReply_Interceptor{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_link_v1_link_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *InterceptorReply_Interceptor) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InterceptorReply_Interceptor) ProtoMessage() {}
+
+func (x *InterceptorReply_Interceptor) ProtoReflect() protoreflect.Message {
+	mi := &file_link_v1_link_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InterceptorReply_Interceptor.ProtoReflect.Descriptor instead.
+func (*InterceptorReply_Interceptor) Descriptor() ([]byte, []int) {
+	return file_link_v1_link_proto_rawDescGZIP(), []int{5, 0}
+}
+
+func (x *InterceptorReply_Interceptor) GetDate() string {
+	if x != nil {
+		return x.Date
+	}
+	return ""
+}
+
+func (x *InterceptorReply_Interceptor) GetClientName() string {
+	if x != nil {
+		return x.ClientName
+	}
+	return ""
+}
+
+func (x *InterceptorReply_Interceptor) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *InterceptorReply_Interceptor) GetUploadSize() int64 {
+	if x != nil {
+		return x.UploadSize
+	}
+	return 0
+}
+
+func (x *InterceptorReply_Interceptor) GetDownloadSize() int64 {
+	if x != nil {
+		return x.DownloadSize
+	}
+	return 0
+}
+
+func (x *InterceptorReply_Interceptor) GetDurationMs() int64 {
+	if x != nil {
+		return x.DurationMs
+	}
+	return 0
+}
+
+func (x *InterceptorReply_Interceptor) GetMethod() string {
+	if x != nil {
+		return x.Method
 	}
 	return ""
 }
@@ -123,20 +670,99 @@ var file_link_v1_link_proto_rawDesc = []byte{
 	0x0a, 0x12, 0x6c, 0x69, 0x6e, 0x6b, 0x2f, 0x76, 0x31, 0x2f, 0x6c, 0x69, 0x6e, 0x6b, 0x2e, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x12, 0x07, 0x6c, 0x69, 0x6e, 0x6b, 0x2e, 0x76, 0x31, 0x1a, 0x1c, 0x67,
 	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x22, 0x0a, 0x0c, 0x48,
-	0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e,
-	0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22,
-	0x26, 0x0a, 0x0a, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x18, 0x0a,
-	0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
-	0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x32, 0x5a, 0x0a, 0x04, 0x4c, 0x69, 0x6e, 0x6b, 0x12,
-	0x52, 0x0a, 0x08, 0x53, 0x61, 0x79, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x12, 0x15, 0x2e, 0x6c, 0x69,
-	0x6e, 0x6b, 0x2e, 0x76, 0x31, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x1a, 0x13, 0x2e, 0x6c, 0x69, 0x6e, 0x6b, 0x2e, 0x76, 0x31, 0x2e, 0x48, 0x65, 0x6c,
-	0x6c, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1a, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x14, 0x12,
-	0x12, 0x2f, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x2f, 0x7b, 0x6e, 0x61,
-	0x6d, 0x65, 0x7d, 0x42, 0x1c, 0x5a, 0x1a, 0x4c, 0x69, 0x6e, 0x6b, 0x2d, 0x4b, 0x72, 0x61, 0x74,
-	0x6f, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6c, 0x69, 0x6e, 0x6b, 0x2f, 0x76, 0x31, 0x3b, 0x76,
-	0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xa8, 0x01, 0x0a, 0x16,
+	0x52, 0x65, 0x61, 0x6c, 0x54, 0x69, 0x6d, 0x65, 0x54, 0x72, 0x61, 0x66, 0x66, 0x69, 0x63, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x5a, 0x0a, 0x10, 0x72, 0x65, 0x61, 0x6c, 0x74, 0x69,
+	0x6d, 0x65, 0x5f, 0x74, 0x72, 0x61, 0x66, 0x66, 0x69, 0x63, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x2f, 0x2e, 0x6c, 0x69, 0x6e, 0x6b, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x61, 0x6c, 0x54,
+	0x69, 0x6d, 0x65, 0x54, 0x72, 0x61, 0x66, 0x66, 0x69, 0x63, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x2e, 0x52, 0x65, 0x61, 0x6c, 0x54, 0x69, 0x6d, 0x65, 0x54, 0x72, 0x61, 0x66, 0x66, 0x69,
+	0x63, 0x52, 0x0f, 0x72, 0x65, 0x61, 0x6c, 0x74, 0x69, 0x6d, 0x65, 0x54, 0x72, 0x61, 0x66, 0x66,
+	0x69, 0x63, 0x1a, 0x32, 0x0a, 0x0f, 0x52, 0x65, 0x61, 0x6c, 0x54, 0x69, 0x6d, 0x65, 0x54, 0x72,
+	0x61, 0x66, 0x66, 0x69, 0x63, 0x12, 0x1f, 0x0a, 0x0b, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x5f,
+	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x63, 0x6c, 0x69, 0x65,
+	0x6e, 0x74, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0xb7, 0x01, 0x0a, 0x14, 0x52, 0x65, 0x61, 0x6c, 0x54,
+	0x69, 0x6d, 0x65, 0x54, 0x72, 0x61, 0x66, 0x66, 0x69, 0x63, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12,
+	0x58, 0x0a, 0x10, 0x72, 0x65, 0x61, 0x6c, 0x74, 0x69, 0x6d, 0x65, 0x5f, 0x74, 0x72, 0x61, 0x66,
+	0x66, 0x69, 0x63, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2d, 0x2e, 0x6c, 0x69, 0x6e, 0x6b,
+	0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x61, 0x6c, 0x54, 0x69, 0x6d, 0x65, 0x54, 0x72, 0x61, 0x66,
+	0x66, 0x69, 0x63, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x2e, 0x52, 0x65, 0x61, 0x6c, 0x54, 0x69, 0x6d,
+	0x65, 0x54, 0x72, 0x61, 0x66, 0x66, 0x69, 0x63, 0x52, 0x0f, 0x72, 0x65, 0x61, 0x6c, 0x74, 0x69,
+	0x6d, 0x65, 0x54, 0x72, 0x61, 0x66, 0x66, 0x69, 0x63, 0x1a, 0x45, 0x0a, 0x0f, 0x52, 0x65, 0x61,
+	0x6c, 0x54, 0x69, 0x6d, 0x65, 0x54, 0x72, 0x61, 0x66, 0x66, 0x69, 0x63, 0x12, 0x16, 0x0a, 0x06,
+	0x75, 0x70, 0x66, 0x6c, 0x6f, 0x77, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x75, 0x70,
+	0x66, 0x6c, 0x6f, 0x77, 0x12, 0x1a, 0x0a, 0x08, 0x64, 0x6f, 0x77, 0x6e, 0x66, 0x6c, 0x6f, 0x77,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x64, 0x6f, 0x77, 0x6e, 0x66, 0x6c, 0x6f, 0x77,
+	0x22, 0x89, 0x01, 0x0a, 0x11, 0x53, 0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x45, 0x0a, 0x0a, 0x73, 0x74, 0x61, 0x74, 0x69, 0x73,
+	0x74, 0x69, 0x63, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x25, 0x2e, 0x6c, 0x69, 0x6e,
+	0x6b, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69, 0x63,
+	0x73, 0x52, 0x0a, 0x73, 0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x1a, 0x2d, 0x0a,
+	0x0a, 0x53, 0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x63,
+	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x0a, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x98, 0x01, 0x0a,
+	0x0f, 0x53, 0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79,
+	0x12, 0x43, 0x0a, 0x0a, 0x73, 0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x23, 0x2e, 0x6c, 0x69, 0x6e, 0x6b, 0x2e, 0x76, 0x31, 0x2e, 0x53,
+	0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x2e, 0x53,
+	0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x52, 0x0a, 0x73, 0x74, 0x61, 0x74, 0x69,
+	0x73, 0x74, 0x69, 0x63, 0x73, 0x1a, 0x40, 0x0a, 0x0a, 0x53, 0x74, 0x61, 0x74, 0x69, 0x73, 0x74,
+	0x69, 0x63, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x75, 0x70, 0x66, 0x6c, 0x6f, 0x77, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x06, 0x75, 0x70, 0x66, 0x6c, 0x6f, 0x77, 0x12, 0x1a, 0x0a, 0x08, 0x64,
+	0x6f, 0x77, 0x6e, 0x66, 0x6c, 0x6f, 0x77, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x64,
+	0x6f, 0x77, 0x6e, 0x66, 0x6c, 0x6f, 0x77, 0x22, 0x82, 0x01, 0x0a, 0x12, 0x49, 0x6e, 0x74, 0x65,
+	0x72, 0x63, 0x65, 0x70, 0x74, 0x6f, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x6c,
+	0x0a, 0x0b, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x63, 0x65, 0x70, 0x74, 0x6f, 0x72, 0x12, 0x1d, 0x0a,
+	0x0a, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x09, 0x75, 0x73, 0x65, 0x72, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x12, 0x16, 0x0a, 0x06,
+	0x6d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x6d, 0x65,
+	0x74, 0x68, 0x6f, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x68, 0x6f, 0x73, 0x74, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x04, 0x68, 0x6f, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x65,
+	0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x61, 0x74, 0x65, 0x22, 0xb7, 0x02, 0x0a,
+	0x10, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x63, 0x65, 0x70, 0x74, 0x6f, 0x72, 0x52, 0x65, 0x70, 0x6c,
+	0x79, 0x12, 0x47, 0x0a, 0x0b, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x63, 0x65, 0x70, 0x74, 0x6f, 0x72,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x25, 0x2e, 0x6c, 0x69, 0x6e, 0x6b, 0x2e, 0x76, 0x31,
+	0x2e, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x63, 0x65, 0x70, 0x74, 0x6f, 0x72, 0x52, 0x65, 0x70, 0x6c,
+	0x79, 0x2e, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x63, 0x65, 0x70, 0x74, 0x6f, 0x72, 0x52, 0x0b, 0x69,
+	0x6e, 0x74, 0x65, 0x72, 0x63, 0x65, 0x70, 0x74, 0x6f, 0x72, 0x1a, 0xd9, 0x01, 0x0a, 0x0b, 0x49,
+	0x6e, 0x74, 0x65, 0x72, 0x63, 0x65, 0x70, 0x74, 0x6f, 0x72, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61,
+	0x74, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x61, 0x74, 0x65, 0x12, 0x1f,
+	0x0a, 0x0b, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0a, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4e, 0x61, 0x6d, 0x65, 0x12,
+	0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x75, 0x70, 0x6c, 0x6f, 0x61,
+	0x64, 0x5f, 0x73, 0x69, 0x7a, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x75, 0x70,
+	0x6c, 0x6f, 0x61, 0x64, 0x53, 0x69, 0x7a, 0x65, 0x12, 0x23, 0x0a, 0x0d, 0x64, 0x6f, 0x77, 0x6e,
+	0x6c, 0x6f, 0x61, 0x64, 0x5f, 0x73, 0x69, 0x7a, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52,
+	0x0c, 0x64, 0x6f, 0x77, 0x6e, 0x6c, 0x6f, 0x61, 0x64, 0x53, 0x69, 0x7a, 0x65, 0x12, 0x1f, 0x0a,
+	0x0b, 0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x6d, 0x73, 0x18, 0x07, 0x20, 0x01,
+	0x28, 0x03, 0x52, 0x0a, 0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4d, 0x73, 0x12, 0x16,
+	0x0a, 0x06, 0x6d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
+	0x6d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x32, 0xc7, 0x02, 0x0a, 0x04, 0x4c, 0x69, 0x6e, 0x6b, 0x12,
+	0x65, 0x0a, 0x0b, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x63, 0x65, 0x70, 0x74, 0x6f, 0x72, 0x12, 0x1b,
+	0x2e, 0x6c, 0x69, 0x6e, 0x6b, 0x2e, 0x76, 0x31, 0x2e, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x63, 0x65,
+	0x70, 0x74, 0x6f, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e, 0x6c, 0x69,
+	0x6e, 0x6b, 0x2e, 0x76, 0x31, 0x2e, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x63, 0x65, 0x70, 0x74, 0x6f,
+	0x72, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1e, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x18, 0x12, 0x16,
+	0x2f, 0x61, 0x70, 0x69, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x73, 0x2f, 0x69, 0x6e, 0x74, 0x65, 0x72,
+	0x63, 0x65, 0x70, 0x74, 0x6f, 0x72, 0x12, 0x61, 0x0a, 0x0a, 0x53, 0x74, 0x61, 0x74, 0x69, 0x73,
+	0x74, 0x69, 0x63, 0x73, 0x12, 0x1a, 0x2e, 0x6c, 0x69, 0x6e, 0x6b, 0x2e, 0x76, 0x31, 0x2e, 0x53,
+	0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x18, 0x2e, 0x6c, 0x69, 0x6e, 0x6b, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x69,
+	0x73, 0x74, 0x69, 0x63, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1d, 0x82, 0xd3, 0xe4, 0x93,
+	0x02, 0x17, 0x12, 0x15, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x73, 0x2f, 0x73,
+	0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x12, 0x75, 0x0a, 0x0f, 0x52, 0x65, 0x61,
+	0x6c, 0x54, 0x69, 0x6d, 0x65, 0x54, 0x72, 0x61, 0x66, 0x66, 0x69, 0x63, 0x12, 0x1f, 0x2e, 0x6c,
+	0x69, 0x6e, 0x6b, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x61, 0x6c, 0x54, 0x69, 0x6d, 0x65, 0x54,
+	0x72, 0x61, 0x66, 0x66, 0x69, 0x63, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e,
+	0x6c, 0x69, 0x6e, 0x6b, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x61, 0x6c, 0x54, 0x69, 0x6d, 0x65,
+	0x54, 0x72, 0x61, 0x66, 0x66, 0x69, 0x63, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x22, 0x82, 0xd3,
+	0xe4, 0x93, 0x02, 0x1c, 0x12, 0x1a, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x73,
+	0x2f, 0x72, 0x65, 0x61, 0x6c, 0x74, 0x69, 0x6d, 0x65, 0x74, 0x72, 0x61, 0x66, 0x66, 0x69, 0x63,
+	0x42, 0x1c, 0x5a, 0x1a, 0x4c, 0x69, 0x6e, 0x6b, 0x2d, 0x4b, 0x72, 0x61, 0x74, 0x6f, 0x73, 0x2f,
+	0x61, 0x70, 0x69, 0x2f, 0x6c, 0x69, 0x6e, 0x6b, 0x2f, 0x76, 0x31, 0x3b, 0x76, 0x31, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -151,19 +777,38 @@ func file_link_v1_link_proto_rawDescGZIP() []byte {
 	return file_link_v1_link_proto_rawDescData
 }
 
-var file_link_v1_link_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_link_v1_link_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_link_v1_link_proto_goTypes = []interface{}{
-	(*HelloRequest)(nil), // 0: link.v1.HelloRequest
-	(*HelloReply)(nil),   // 1: link.v1.HelloReply
+	(*RealTimeTrafficRequest)(nil),                 // 0: link.v1.RealTimeTrafficRequest
+	(*RealTimeTrafficReply)(nil),                   // 1: link.v1.RealTimeTrafficReply
+	(*StatisticsRequest)(nil),                      // 2: link.v1.StatisticsRequest
+	(*StatisticsReply)(nil),                        // 3: link.v1.StatisticsReply
+	(*InterceptorRequest)(nil),                     // 4: link.v1.InterceptorRequest
+	(*InterceptorReply)(nil),                       // 5: link.v1.InterceptorReply
+	(*RealTimeTrafficRequest_RealTimeTraffic)(nil), // 6: link.v1.RealTimeTrafficRequest.RealTimeTraffic
+	(*RealTimeTrafficReply_RealTimeTraffic)(nil),   // 7: link.v1.RealTimeTrafficReply.RealTimeTraffic
+	(*StatisticsRequest_Statistics)(nil),           // 8: link.v1.StatisticsRequest.Statistics
+	(*StatisticsReply_Statistics)(nil),             // 9: link.v1.StatisticsReply.Statistics
+	(*InterceptorRequest_Interceptor)(nil),         // 10: link.v1.InterceptorRequest.Interceptor
+	(*InterceptorReply_Interceptor)(nil),           // 11: link.v1.InterceptorReply.Interceptor
 }
 var file_link_v1_link_proto_depIdxs = []int32{
-	0, // 0: link.v1.Link.SayHello:input_type -> link.v1.HelloRequest
-	1, // 1: link.v1.Link.SayHello:output_type -> link.v1.HelloReply
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	6,  // 0: link.v1.RealTimeTrafficRequest.realtime_traffic:type_name -> link.v1.RealTimeTrafficRequest.RealTimeTraffic
+	7,  // 1: link.v1.RealTimeTrafficReply.realtime_traffic:type_name -> link.v1.RealTimeTrafficReply.RealTimeTraffic
+	8,  // 2: link.v1.StatisticsRequest.statistics:type_name -> link.v1.StatisticsRequest.Statistics
+	9,  // 3: link.v1.StatisticsReply.statistics:type_name -> link.v1.StatisticsReply.Statistics
+	11, // 4: link.v1.InterceptorReply.interceptor:type_name -> link.v1.InterceptorReply.Interceptor
+	4,  // 5: link.v1.Link.Interceptor:input_type -> link.v1.InterceptorRequest
+	2,  // 6: link.v1.Link.Statistics:input_type -> link.v1.StatisticsRequest
+	0,  // 7: link.v1.Link.RealTimeTraffic:input_type -> link.v1.RealTimeTrafficRequest
+	5,  // 8: link.v1.Link.Interceptor:output_type -> link.v1.InterceptorReply
+	3,  // 9: link.v1.Link.Statistics:output_type -> link.v1.StatisticsReply
+	1,  // 10: link.v1.Link.RealTimeTraffic:output_type -> link.v1.RealTimeTrafficReply
+	8,  // [8:11] is the sub-list for method output_type
+	5,  // [5:8] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_link_v1_link_proto_init() }
@@ -173,7 +818,7 @@ func file_link_v1_link_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_link_v1_link_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*HelloRequest); i {
+			switch v := v.(*RealTimeTrafficRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -185,7 +830,127 @@ func file_link_v1_link_proto_init() {
 			}
 		}
 		file_link_v1_link_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*HelloReply); i {
+			switch v := v.(*RealTimeTrafficReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_link_v1_link_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*StatisticsRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_link_v1_link_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*StatisticsReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_link_v1_link_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*InterceptorRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_link_v1_link_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*InterceptorReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_link_v1_link_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RealTimeTrafficRequest_RealTimeTraffic); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_link_v1_link_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RealTimeTrafficReply_RealTimeTraffic); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_link_v1_link_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*StatisticsRequest_Statistics); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_link_v1_link_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*StatisticsReply_Statistics); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_link_v1_link_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*InterceptorRequest_Interceptor); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_link_v1_link_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*InterceptorReply_Interceptor); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -203,7 +968,7 @@ func file_link_v1_link_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_link_v1_link_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
