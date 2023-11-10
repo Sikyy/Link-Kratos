@@ -23,14 +23,13 @@ func FlowUnitTransform() middleware.Middleware {
 		return func(ctx context.Context, req interface{}) (reply interface{}, err error) {
 			if tr, ok := transport.FromServerContext(ctx); ok {
 				// 获取请求流量大小
-				UpflowSize := tr.ReplyHeader().Get("upload")
-				DownflowSize := tr.ReplyHeader().Get("download")
+				UpflowSize := tr.RequestHeader().Get("upload")
+				DownflowSize := tr.RequestHeader().Get("download")
 
 				// 转换流量单位
 				UptransformedSize := TransformUnit(UpflowSize)
 				DowntransformedSize := TransformUnit(DownflowSize)
 
-				// 设置转换后的流量大小到请求上下文中
 				fmt.Println("上传流量大小: ", UptransformedSize, "下载流量大小: ", DowntransformedSize)
 			}
 
@@ -40,7 +39,16 @@ func FlowUnitTransform() middleware.Middleware {
 }
 
 // 根据需要实现流量单位转换的逻辑
+// 2023/11/10 花了三小时,换了https://github.com/shopspring/decimal库还是没搞定,先放着吧，换回原先的逻辑了，能用就行
 func TransformUnit(size string) string {
+
+	// 检查 size 是否为空
+	if size == "" {
+		log.Println("输入流量大小为空")
+		return "" // 或者返回默认值
+	}
+
+	log.Printf("输入流量大小: %s"+" B", size)
 
 	// 定义一个流量单位的映射表
 	unitToFactor := map[string]int64{
@@ -58,8 +66,8 @@ func TransformUnit(size string) string {
 		log.Printf("转换格式错误: %v", err)
 	}
 
-	// 获取流量的单位
-	unit := "B"
+	// 根据流量大小确定流量单位
+	var unit string
 	for k, v := range unitToFactor {
 		if newsize >= v {
 			unit = k
@@ -75,5 +83,5 @@ func TransformUnit(size string) string {
 	result := fmt.Sprintf("%s %s", strconv.FormatFloat(newfloatsize, 'f', 2, 64), unit)
 
 	// 返回转换后的流量大小和单位
-	return result //有精度问题，明天解决
+	return result
 }
