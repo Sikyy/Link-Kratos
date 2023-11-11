@@ -18,6 +18,7 @@ type FlowUnit struct {
 
 }
 
+// FlowUnitTransform 是一个 Kratos 中间件，用于处理流量单位转换逻辑。
 func FlowUnitTransform() middleware.Middleware {
 	return func(handler middleware.Handler) middleware.Handler {
 		return func(ctx context.Context, req interface{}) (reply interface{}, err error) {

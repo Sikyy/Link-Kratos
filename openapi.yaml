@@ -6,6 +6,25 @@ info:
     title: Link API
     version: 0.0.1
 paths:
+    /api/users:
+        post:
+            tags:
+                - Link
+            description: 注册
+            operationId: Link_Register
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/link.v1.RegisterRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/link.v1.UserReply'
     /api/users/interceptor:
         get:
             tags:
@@ -19,6 +38,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/link.v1.InterceptorReply'
+    /api/users/login:
+        post:
+            tags:
+                - Link
+            description: 登陆
+            operationId: Link_Login
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/link.v1.LoginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/link.v1.UserReply'
     /api/users/realtimetraffic:
         get:
             tags:
@@ -79,6 +117,18 @@ components:
                     type: string
                 method:
                     type: string
+        link.v1.LoginRequest:
+            type: object
+            properties:
+                user:
+                    $ref: '#/components/schemas/link.v1.LoginRequest_User'
+        link.v1.LoginRequest_User:
+            type: object
+            properties:
+                email:
+                    type: string
+                password:
+                    type: string
         link.v1.RealTimeTrafficReply:
             type: object
             properties:
@@ -91,6 +141,20 @@ components:
                     type: string
                 downflow:
                     type: string
+        link.v1.RegisterRequest:
+            type: object
+            properties:
+                user:
+                    $ref: '#/components/schemas/link.v1.RegisterRequest_User'
+        link.v1.RegisterRequest_User:
+            type: object
+            properties:
+                username:
+                    type: string
+                email:
+                    type: string
+                password:
+                    type: string
         link.v1.StatisticsReply:
             type: object
             properties:
@@ -102,6 +166,24 @@ components:
                 upflow:
                     type: string
                 downflow:
+                    type: string
+        link.v1.UserReply:
+            type: object
+            properties:
+                user:
+                    $ref: '#/components/schemas/link.v1.UserReply_User'
+        link.v1.UserReply_User:
+            type: object
+            properties:
+                email:
+                    type: string
+                token:
+                    type: string
+                username:
+                    type: string
+                bio:
+                    type: string
+                image:
                     type: string
 tags:
     - name: Link

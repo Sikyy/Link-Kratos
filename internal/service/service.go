@@ -13,9 +13,10 @@ var ProviderSet = wire.NewSet(NewLinkService)
 type LinkService struct {
 	v1.UnimplementedLinkServer
 
-	uc *biz.TrafficUsecase
+	tc *biz.TrafficUsecase
+	uc *biz.UserUsecase
 }
 
-func NewLinkService(uc *biz.TrafficUsecase) *LinkService {
-	return &LinkService{uc: uc}
+func NewLinkService(tc *biz.TrafficUsecase, uc *biz.UserUsecase) *LinkService {
+	return &LinkService{uc: uc, tc: tc}
 }

@@ -112,7 +112,7 @@ func (uc *TrafficUsecase) GetInterceptorById(ctx context.Context, id int) (*Inte
 		ClientName: "哔哩哔哩",
 		Status:     "活动中",
 		Upload:     482348346,
-		Download:   649839493275,
+		Download:   649839493,
 		Time:       "3000ms",
 	}, nil
 }

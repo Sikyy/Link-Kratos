@@ -19,6 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
+	Link_Register_FullMethodName        = "/link.v1.Link/Register"
+	Link_Login_FullMethodName           = "/link.v1.Link/Login"
 	Link_Interceptor_FullMethodName     = "/link.v1.Link/Interceptor"
 	Link_Statistics_FullMethodName      = "/link.v1.Link/Statistics"
 	Link_RealTimeTraffic_FullMethodName = "/link.v1.Link/RealTimeTraffic"
@@ -28,6 +30,10 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type LinkClient interface {
+	// 注册
+	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*UserReply, error)
+	// 登陆
+	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*UserReply, error)
 	// 拦截流量信息，并返回
 	Interceptor(ctx context.Context, in *InterceptorRequest, opts ...grpc.CallOption) (*InterceptorReply, error)
 	// 统计流量信息，并返回
@@ -42,6 +48,24 @@ type linkClient struct {
 
 func NewLinkClient(cc grpc.ClientConnInterface) LinkClient {
 	return &linkClient{cc}
+}
+
+func (c *linkClient) Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*UserReply, error) {
+	out := new(UserReply)
+	err := c.cc.Invoke(ctx, Link_Register_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *linkClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*UserReply, error) {
+	out := new(UserReply)
+	err := c.cc.Invoke(ctx, Link_Login_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *linkClient) Interceptor(ctx context.Context, in *InterceptorRequest, opts ...grpc.CallOption) (*InterceptorReply, error) {
@@ -75,6 +99,10 @@ func (c *linkClient) RealTimeTraffic(ctx context.Context, in *RealTimeTrafficReq
 // All implementations must embed UnimplementedLinkServer
 // for forward compatibility
 type LinkServer interface {
+	// 注册
+	Register(context.Context, *RegisterRequest) (*UserReply, error)
+	// 登陆
+	Login(context.Context, *LoginRequest) (*UserReply, error)
 	// 拦截流量信息，并返回
 	Interceptor(context.Context, *InterceptorRequest) (*InterceptorReply, error)
 	// 统计流量信息，并返回
@@ -88,6 +116,12 @@ type LinkServer interface {
 type UnimplementedLinkServer struct {
 }
 
+func (UnimplementedLinkServer) Register(context.Context, *RegisterRequest) (*UserReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
+}
+func (UnimplementedLinkServer) Login(context.Context, *LoginRequest) (*UserReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
 func (UnimplementedLinkServer) Interceptor(context.Context, *InterceptorRequest) (*InterceptorReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Interceptor not implemented")
 }
@@ -108,6 +142,42 @@ type UnsafeLinkServer interface {
 
 func RegisterLinkServer(s grpc.ServiceRegistrar, srv LinkServer) {
 	s.RegisterService(&Link_ServiceDesc, srv)
+}
+
+func _Link_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LinkServer).Register(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Link_Register_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LinkServer).Register(ctx, req.(*RegisterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Link_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LinkServer).Login(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Link_Login_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LinkServer).Login(ctx, req.(*LoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Link_Interceptor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -171,6 +241,14 @@ var Link_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "link.v1.Link",
 	HandlerType: (*LinkServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Register",
+			Handler:    _Link_Register_Handler,
+		},
+		{
+			MethodName: "Login",
+			Handler:    _Link_Login_Handler,
+		},
 		{
 			MethodName: "Interceptor",
 			Handler:    _Link_Interceptor_Handler,
