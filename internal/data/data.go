@@ -33,13 +33,13 @@ func NewDB(c *conf.Data) *gorm.DB {
 	if err != nil {
 		panic(err)
 	}
-	// InitDB(db)
+	InitDB(db)
 	return db
 }
 
 // AutoMigrate用于自动创建表
-// func InitDB(db *gorm.DB) {
-// 	if err := db.AutoMigrate(&User{}); err != nil {
-// 		panic(err)
-// 	}
-// }
+func InitDB(db *gorm.DB) {
+	if err := db.AutoMigrate(&User{}); err != nil {
+		panic(err)
+	}
+}

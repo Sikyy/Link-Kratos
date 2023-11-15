@@ -48,6 +48,7 @@ type UserRepo interface {
 }
 
 type ProfileRepo interface {
+	GetProfile(ctx context.Context, username string) (*Profile, error)
 }
 
 type UserUsecase struct {

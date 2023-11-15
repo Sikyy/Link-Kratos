@@ -44,16 +44,16 @@ func NewProfileRepo(data *Data, logger log.Logger) biz.ProfileRepo {
 }
 
 func (r *userRepo) CreateUser(ctx context.Context, u *biz.User) error {
-	return nil
-	// user := User{
-	// 	Email:        u.Email,
-	// 	Username:     u.Username,
-	// 	Bio:          u.Bio,
-	// 	Image:        u.Image,
-	// 	PasswordHash: u.PasswordHash,
-	// }
-	// rv := r.data.db.Create(&user)
-	// return rv.Error
+	user := User{
+		Email:        u.Email,
+		Username:     u.Username,
+		Bio:          u.Bio,
+		Image:        u.Image,
+		PasswordHash: u.PasswordHash,
+	}
+	//创建用户，在数据库中创建一条记录
+	rv := r.data.db.Create(&user)
+	return rv.Error
 }
 
 func (r *userRepo) GetUserByEmail(ctx context.Context, email string) (rv *biz.User, err error) {
@@ -72,5 +72,20 @@ func (r *userRepo) GetUserByEmail(ctx context.Context, email string) (rv *biz.Us
 		Bio:          u.Bio,
 		Image:        u.Image,
 		PasswordHash: u.PasswordHash,
+	}, nil
+}
+
+func (r *profileRepo) GetProfile(ctx context.Context, username string) (rv *biz.Profile, err error) {
+	u := new(User)
+	err = r.data.db.Where("username = ?", username).First(u).Error
+	if err != nil {
+		return nil, err
+	}
+	return &biz.Profile{
+		ID:        u.ID,
+		Username:  u.Username,
+		Bio:       u.Bio,
+		Image:     u.Image,
+		Following: false, // fixme
 	}, nil
 }
